@@ -1,0 +1,35 @@
+#include<cstdio>
+#include<cstdlib>
+#include<string>
+#include<vector>
+#include<map>
+#include<set>
+#include<queue>
+#include<stack>
+#include<algorithm>
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+
+#define pb push_back
+#define mp make_pair
+#define fs first
+#define sc second
+
+char s[300005],t[300005];
+int n;
+
+void read_input(){
+    scanf(" %s %s",s,t);
+
+    n = strlen(s);
+
+    sort(s,s+strlen(s));
+    sort(t +)
+}
+
+int main(){
+    read_input();
+    return 0;
+}
