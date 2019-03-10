@@ -21,6 +21,7 @@ using namespace std;
 #define sc second
 
 int n, cnt;
+vector<int> ar;
 
 int find_max(int left, int right) {
   while (left < right) {
@@ -45,28 +46,35 @@ int gcd(int a, int b) {
 }
 
 void read_input() {
-  mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+  mt19937 rng32(chrono::steady_clock::now().time_since_epoch().count());
   scanf(" %d", &n);
   int max_elem = find_max(0, 1e9);
-
-  vector<int> perm(n);
-  for (int i = 0; i < n; ++i)
-    perm[i] = i + 1;
-
-  shuffle(perm.begin(), perm.end(), rng);
-
-  for (int i = 0; i < n - 1 && i < cnt; ++i) {
-    printf("? %d\n", perm[i]);
-    scanf(" %d", &perm[i]);
+  int ar_size = min(n, 60 - cnt);
+  vector<int> ar(ar_size);
+  for (int i = 0; i < ar.size(); ++i) {
+    ar[i] = i + 1;
   }
-  perm[min(cnt, n - 1)] = max_elem;
+  shuffle(ar.begin(), ar.end(), rng32);
 
-  sort(perm.begin(), perm.end(), greater<int>());
-  int all_gcd = perm[0] - perm[1];
-  for (int i = 0; i < cnt && i < n - 1; ++i) {
-    all_gcd = gcd(all_gcd, perm[i] - perm[i + 1]);
+  for (int i = 0; i < ar_size; ++i) {
+    printf("? %d\n", ar[i]);
+    fflush(stdout);
+    int tmp;
+    scanf(" %d", &tmp);
+    ar[i] = tmp;
   }
+
+  sort(ar.begin(), ar.end());
+  if (ar[ar_size - 1] != max_elem)
+    ar.pb(max_elem);
+  int all_gcd = 0;
+  for (int i = 1; i < ar.size(); ++i)
+    for (int j = 0; j < i; ++j) {
+      all_gcd = gcd(ar[i] - ar[j], all_gcd);
+    }
+
   printf("! %d %d\n", max_elem - all_gcd * (n - 1), all_gcd);
+  fflush(stdout);
 }
 
 int main() {
