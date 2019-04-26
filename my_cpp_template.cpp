@@ -1,15 +1,15 @@
-#include<cstdio>
-#include<cstdlib>
-#include<string>
-#include<cstring>
-#include<vector>
-#include<map>
-#include<set>
-#include<queue>
-#include<stack>
-#include<algorithm>
-#include<iostream>
-#include<cmath>
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -18,10 +18,4 @@ using namespace std;
 #define fs first
 #define sc second
 
-void read_input(){
-}
-
-int main(){
-    read_input();
-    return 0;
-}
+int main() { return 0; }
