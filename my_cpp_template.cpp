@@ -18,4 +18,6 @@ using namespace std;
 #define fs first
 #define sc second
 
-int main() { return 0; }
+int main() {
+  return 0;
+}
