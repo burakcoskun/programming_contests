@@ -19,20 +19,21 @@ using namespace std;
 #define sc second
 
 map<int, int> vname;
-map<pair<int, int>, int> used;
-vector<vector<int>> e(2 * (1e5 + 10));
-vector<int> vals(1e5 + 10), b, c;
+vector<multiset<int>> e(2 * (1e5 + 10));
+// vector<vector<int>> e(2 * (1e5 + 10));
+vector<int> vals(2 * (1e5 + 10)), b, c;
+vector<int> res;
 int n;
 
 void euler(int v) {
-  for (int i = 0; i < e[v].size(); ++i)
-    if (used[mp(v, e[v][i])] > 0) {
-      used[mp(v, e[v][i])]--;
-      used[mp(e[v][i], v)]--;
-      // cout << "v:" << e[v][i] << endl;
-      euler(e[v][i]);
-    }
-  cout << vals[v] << " ";
+  while (!e[v].empty()) {
+    int node = *e[v].begin();
+    e[v].erase(e[v].begin());
+    e[node].erase(e[node].find(v));
+    // cout << "v:" << e[v][i] << endl;
+    euler(node);
+  }
+  res.pb(vals[v]);
 }
 
 int main() {
@@ -64,10 +65,8 @@ int main() {
       return 0;
     }
     int v1 = vname[c[i]], v2 = vname[b[i]];
-    e[v1].pb(v2);
-    e[v2].pb(v1);
-    used[mp(v1, v2)]++;
-    used[mp(v2, v1)]++;
+    e[v1].insert(v2);
+    e[v2].insert(v1);
   }
   int odd = 0, first_odd = 0;
   for (int i = 0; i < pos; ++i) {
@@ -83,5 +82,11 @@ int main() {
   // cout << odd << " " << vals[first_odd] << " " << first_odd << " "
   //     << vname[vals[first_odd]] << endl;
   euler(first_odd);
+  if (res.size() == n + 1) {
+    for (int i = 0; i < res.size(); ++i)
+      cout << res[i] << " ";
+  } else
+    cout << -1;
+  cout << endl;
   return 0;
 }
