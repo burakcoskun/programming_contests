@@ -2,6 +2,8 @@
 
 using namespace std;
 
+typedef long long ll;
+
 #define pb push_back
 #define mp make_pair
 #define fs first
